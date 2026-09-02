@@ -1,23 +1,13 @@
-import { useEffect, useState } from "react";
+import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
-    const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        fetch("http://localhost:5000/api/test")
-            .then((response) => response.json())
-            .then((data) => {
-                setMessage(data.message);
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-            });
-    }, []);
-
     return (
         <div>
-            <h1>Farmer E-Commerce</h1>
-            <p>{message}</p>
+            <Navbar />
+
+            <h1>Farmer's Mart</h1>
+            <p>Smart farming. Better decisions. Better harvests.</p>
         </div>
     );
 }
