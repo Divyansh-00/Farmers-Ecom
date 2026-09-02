@@ -1,39 +1,22 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-import RecommendationForm from "./components/RecommendationForm";
-import Categories from "./components/Categories";
-import FeaturedProducts from "./components/FeaturedProducts";
-import HowItWorks from "./components/HowItWorks";
-import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Recommendations from "./pages/Recommendations";
+import Cart from "./pages/Cart";
+import Login from "./pages/Login";
 
 function App() {
     return (
-        <div>
-            <Navbar />
-
-            <main className="hero">
-                <h1>Smart Farming Starts Here</h1>
-
-                <p>
-                    Find the right products for your crops
-                    and get recommendations based on your weather.
-                </p>
-
-                <button>🌱 Get Recommendations</button>
-            </main>
-
-            <RecommendationForm />
-
-            <Categories />
-
-            <FeaturedProducts />
-
-            <HowItWorks/>
-
-            <Footer/>
-
-            
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/recommendations" element={<Recommendations />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/login" element={<Login />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

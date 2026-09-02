@@ -293,3 +293,25 @@
     margin: 0;
     font-size: 14px;
 }
+.products-page {
+    padding: 60px 40px;
+    text-align: center;
+    min-height: 600px;
+}
+
+.products-page h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.products-page > p {
+    font-size: 17px;
+    margin-bottom: 40px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    justify-content: center;
+    gap: 25px;
+}
