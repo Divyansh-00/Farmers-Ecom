@@ -2,6 +2,9 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import RecommendationForm from "./components/RecommendationForm";
 import Categories from "./components/Categories";
+import FeaturedProducts from "./components/FeaturedProducts";
+import HowItWorks from "./components/HowItWorks";
+import Footer from "./components/Footer";
 
 function App() {
     return (
@@ -21,8 +24,15 @@ function App() {
 
             <RecommendationForm />
 
-            
             <Categories />
+
+            <FeaturedProducts />
+
+            <HowItWorks/>
+
+            <Footer/>
+
+            
         </div>
     );
 }
