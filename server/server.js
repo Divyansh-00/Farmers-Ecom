@@ -3,10 +3,14 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const cropRoutes = require("./routes/cropRoutes");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/api/crops", cropRoutes);
 
 app.get("/", (req, res) => {
     res.send("Farmer Ecommerce API is running");
