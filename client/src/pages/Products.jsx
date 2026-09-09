@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useCart } from "../context/CartContext";
 
 function Products() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+    const { addToCart } = useCart();
 
     useEffect(() => {
         fetch("http://localhost:5000/api/products")
@@ -59,7 +61,9 @@ function Products() {
 
                             <strong>₹{product.price}</strong>
 
-                            <button>Add to Cart</button>
+                            <button onClick ={() => addToCart(product)}>
+                                Add to Cart
+                            </button>
                         </div>
                     ))}
                 </div>
