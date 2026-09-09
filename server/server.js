@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const cropRoutes = require("./routes/cropRoutes");
-const productRoutes = require("./routes/productRoutes")
+const productRoutes = require("./routes/productRoutes");
+const getWeather = require("./services/weatherService");
 
 const app = express();
 
@@ -22,6 +23,19 @@ app.get("/api/test", (req, res) => {
     res.json({
         message: "API connection successful"
     });
+});
+
+app.get("/api/weather/:location", async (req, res) => {
+    try {
+        const weather = await getWeather(req.params.location);
+        res.json(weather);
+    } catch (error) {
+        console.error("WEATHER ERROR:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+    }
 });
 
 mongoose.connect(process.env.MONGO_URI)
