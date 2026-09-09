@@ -1,7 +1,32 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function Products() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/products")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch products");
+                }
+
+                return response.json();
+            })
+            .then((data) => {
+                setProducts(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setError("Unable to load products");
+                setLoading(false);
+            });
+    }, []);
+
     return (
         <div>
             <Navbar />
@@ -13,56 +38,30 @@ function Products() {
                     Browse our collection of farming products.
                 </p>
 
+                {loading && <p>Loading products...</p>}
+
+                {error && <p>{error}</p>}
+
                 <div className="products-grid">
+                    {products.map((product) => (
+                        <div className="product-card" key={product._id}>
+                            <div className="product-image">
+                                {product.category === "Seeds"
+                                    ? "🌱"
+                                    : product.category === "Fertilizers"
+                                    ? "🧪"
+                                    : "🛠️"}
+                            </div>
 
-                    <div className="product-card">
-                        <div className="product-image">🌾</div>
+                            <h3>{product.name}</h3>
 
-                        <h3>Premium Wheat Seeds</h3>
+                            <p>{product.description}</p>
 
-                        <p>High-quality wheat seeds for better yield.</p>
+                            <strong>₹{product.price}</strong>
 
-                        <strong>₹499</strong>
-
-                        <button>Add to Cart</button>
-                    </div>
-
-                    <div className="product-card">
-                        <div className="product-image">🌱</div>
-
-                        <h3>Vegetable Seeds</h3>
-
-                        <p>Quality seeds for vegetable farming.</p>
-
-                        <strong>₹299</strong>
-
-                        <button>Add to Cart</button>
-                    </div>
-
-                    <div className="product-card">
-                        <div className="product-image">🧪</div>
-
-                        <h3>Organic Fertilizer</h3>
-
-                        <p>Natural fertilizer for healthy crop growth.</p>
-
-                        <strong>₹699</strong>
-
-                        <button>Add to Cart</button>
-                    </div>
-
-                    <div className="product-card">
-                        <div className="product-image">🛠️</div>
-
-                        <h3>Farming Tool Kit</h3>
-
-                        <p>Essential tools for everyday farming.</p>
-
-                        <strong>₹899</strong>
-
-                        <button>Add to Cart</button>
-                    </div>
-
+                            <button>Add to Cart</button>
+                        </div>
+                    ))}
                 </div>
             </main>
 
