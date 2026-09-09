@@ -8,6 +8,8 @@ function Products() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const { addToCart } = useCart();
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
 
     useEffect(() => {
         fetch("http://localhost:5000/api/products")
@@ -39,13 +41,33 @@ function Products() {
                 <p>
                     Browse our collection of farming products.
                 </p>
+                <input 
+                    type="text"
+                    placeholder="Search Products..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                >
+                    <option value="">All Categories</option>
+                    <option value="Seeds">Seeds</option>
+                    <option value="Fertilizers">Fertilizers</option>
+                    <option value="Tools">Tools</option>
+                </select>    
 
                 {loading && <p>Loading products...</p>}
 
                 {error && <p>{error}</p>}
 
                 <div className="products-grid">
-                    {products.map((product) => (
+                    {products
+                        .filter((product) =>
+                            product.name.toLowerCase().includes(search.toLowerCase()) &&
+                            (category === "" || product.category === category)
+                        )
+                        .map((product) => (
                         <div className="product-card" key={product._id}>
                             <div className="product-image">
                                 {product.category === "Seeds"

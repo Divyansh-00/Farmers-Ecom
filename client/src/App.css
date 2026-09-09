@@ -398,3 +398,33 @@
     font-size: 14px;
     line-height: 1.5;
 }
+.products-page input,
+.products-page select {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-right: 10px;
+    margin-bottom: 25px;
+    outline: none;
+}
+
+.products-page input {
+    width: 300px;
+}
+
+.products-page select {
+    width: 200px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+.products-page select option {
+    background-color: white;
+    color: black;
+}
+
+.products-page input:focus,
+.products-page select:focus {
+    border-color: #4caf50;
+}
