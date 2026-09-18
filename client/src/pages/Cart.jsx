@@ -1,8 +1,11 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+    const navigate = useNavigate();
+
     const {
         cart,
         removeFromCart,
@@ -68,7 +71,9 @@ function Cart() {
                         <div className="cart-total">
                             <h2>Total: ₹{getCartTotal()}</h2>
 
-                            <button>Proceed to Checkout</button>
+                            <button onClick={() => navigate("/checkout")}>
+                                Proceed to Checkout
+                            </button>
                         </div>
                     </>
                 )}
