@@ -6,6 +6,7 @@ require("dotenv").config();
 const cropRoutes = require("./routes/cropRoutes");
 const productRoutes = require("./routes/productRoutes");
 const getWeather = require("./services/weatherService");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.json());
 
 app.use("/api/crops", cropRoutes);
 app.use("/api/products", productRoutes);
-
+app.use("/api/orders", orderRoutes);
 app.get("/", (req, res) => {
     res.send("Farmer Ecommerce API is running");
 });

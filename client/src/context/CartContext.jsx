@@ -59,6 +59,10 @@ useEffect(() => {
         );
     };
 
+    const clearCart = () => {
+    setCart([]);
+};
+
     const getCartTotal = () => {
         return cart.reduce(
             (total, item) => total + item.price * item.quantity,
@@ -74,7 +78,8 @@ useEffect(() => {
                 removeFromCart,
                 increaseQuantity,
                 decreaseQuantity,
-                getCartTotal
+                getCartTotal,
+                clearCart
             }}
         >
             {children}
